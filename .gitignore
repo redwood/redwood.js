@@ -1,0 +1,6 @@
+.envrc
+.env
+node_modules/
+client/esm/
+client/cjs/
+react/lib/

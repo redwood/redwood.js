@@ -1,0 +1,41 @@
+{
+  "name": "@redwood.dev/react",
+  "version": "0.3.9",
+  "description": "",
+  "author": "Bryn Bellomy",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redwood/redwood.js.git"
+  },
+  "keywords": [
+    "p2p"
+  ],
+  "bugs": {
+    "url": "https://github.com/redwood/redwood.js/issues"
+  },
+  "homepage": "https://redwood.dev",
+  "private": false,
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "prepublishOnly": "yarn build"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "@redwood.dev/client": "0.3.9",
+    "@types/lodash": "^4.14.179"
+  }
+}
