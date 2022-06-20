@@ -1,6 +1,6 @@
 {
   "name": "@redwood.dev/client",
-  "version": "0.3.9",
+  "version": "0.3.11",
   "description": "",
   "author": "Bryn Bellomy",
   "license": "MIT",
@@ -65,6 +65,7 @@
     "@types/ws": "^8.5.2",
     "buffer": "^6.0.3",
     "ethers": "^5.0.31",
+    "form-data": "^4.0.0",
     "isomorphic-ws": "^4.0.1",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.21",

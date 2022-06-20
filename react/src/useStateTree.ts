@@ -7,22 +7,8 @@ function useStateTree(stateURI: string, keypath?: string) {
         redwoodClient,
         subscribe,
         stateTrees,
-        updatePrivateTreeMembers,
         setState,
     } = useRedwood()
-
-    useEffect(() => {
-        ;(async function() {
-            if (!redwoodClient || !updatePrivateTreeMembers) {
-                return
-            }
-            // @@TODO: just read from the `.Members` keypath
-            if (!!redwoodClient.rpc) {
-                const members = await redwoodClient.rpc.privateTreeMembers(stateURI)
-                updatePrivateTreeMembers(stateURI, members)
-            }
-        })()
-    }, [redwoodClient, stateURI, updatePrivateTreeMembers, (stateTrees || {})[stateURI] ])
 
     useEffect(() => {
         const unsubscribePromise = subscribe(stateURI)

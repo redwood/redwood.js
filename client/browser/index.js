@@ -1762,17 +1762,6 @@ function createRPCClient({ endpoint }) {
         removeStaticRelay: async function (dialAddr) {
             await rpcFetch(endpoint, 'RPC.RemoveStaticRelay', { DialAddr: dialAddr });
         },
-        privateTreeMembers: async function (stateURI) {
-            try {
-                return (await rpcFetch(endpoint, 'RPC.PrivateTreeMembers', { StateURI: stateURI })).Members;
-            }
-            catch (err) {
-                if (`${err}`.indexOf('no controller for that stateURI') > -1) {
-                    return [];
-                }
-                throw err;
-            }
-        },
         peers: async function () {
             let peers = (await rpcFetch(endpoint, 'RPC.Peers')).Peers;
             return peers.map(peer => ({

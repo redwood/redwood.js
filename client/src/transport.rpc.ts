@@ -72,17 +72,6 @@ export default function createRPCClient({ endpoint }: { endpoint: string }): RPC
             await rpcFetch(endpoint, 'RPC.RemoveStaticRelay', { DialAddr: dialAddr })
         },
 
-        privateTreeMembers: async function (stateURI: string) {
-            try {
-                return (await rpcFetch(endpoint, 'RPC.PrivateTreeMembers', { StateURI: stateURI })).Members as string[]
-            } catch (err) {
-                if (`${err}`.indexOf('no controller for that stateURI') > -1) {
-                    return []
-                }
-                throw err
-            }
-        },
-
         peers: async function (): Promise<RPCPeer[]> {
             let peers = (await rpcFetch(endpoint, 'RPC.Peers')).Peers as {
                 Identities:          { Address: string, SigningPublicKey: string, EncryptingPublicKey: string }[]

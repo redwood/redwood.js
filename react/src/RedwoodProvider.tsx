@@ -11,9 +11,7 @@ export interface IContext {
     subscribedStateURIs: React.MutableRefObject<{[stateURI: string]: boolean}>
     stateTrees: any
     updateStateTree: (stateURI: string, newTree: any, newLeaves: string[]) => void
-    updatePrivateTreeMembers: (stateURI: string, members: string[]) => void
     leaves: {[txID: string]: boolean}
-    privateTreeMembers: {[stateURI: string]: string[]}
     browserPeers: PeersMap
     nodePeers: RPCPeer[]
     fetchIdentities: () => void
@@ -31,9 +29,7 @@ export const Context = createContext<IContext>({
     subscribedStateURIs: { current: {} },
     stateTrees: {},
     updateStateTree: (stateURI: string, newTree: any, newLeaves: string[]) => {},
-    updatePrivateTreeMembers: (stateURI: string, members: string[]) => {},
     leaves: {},
-    privateTreeMembers: {},
     browserPeers: {},
     nodePeers: [],
     fetchIdentities: () => {},
@@ -57,7 +53,6 @@ function Provider(props: {
     const [stateTrees, setStateTrees] = useState({})
     const [leaves, setLeaves] = useState({})
     const [browserPeers, setBrowserPeers] = useState({})
-    const [privateTreeMembers, setPrivateTreeMembers] = useState({})
     const [nodePeers, setNodePeers] = useState<RPCPeer[]>([])
     const [error, setError] = useState(null)
 
@@ -70,7 +65,6 @@ function Provider(props: {
             setStateTrees({})
             setLeaves({})
             setBrowserPeers({})
-            setPrivateTreeMembers({})
             setError(null)
 
             if (!httpHost) {
@@ -113,10 +107,6 @@ function Provider(props: {
             }
         }
     }, [identity, httpHost, rpcEndpoint, webrtc])
-
-    let updatePrivateTreeMembers = useCallback((stateURI: string, members: string[]) => {
-        setPrivateTreeMembers(prevMembers => ({ ...prevMembers, [stateURI]: members }))
-    }, [setStateTrees, setLeaves])
 
     let updateStateTree = useCallback((stateURI: string, newTree: any, newLeaves: string[]) => {
         setStateTrees(prevState => ({ ...prevState, [stateURI]: newTree }))
@@ -186,8 +176,6 @@ function Provider(props: {
           stateTrees,
           leaves,
           updateStateTree,
-          updatePrivateTreeMembers,
-          privateTreeMembers,
           browserPeers,
           nodePeers,
           fetchIdentities: () => {},
